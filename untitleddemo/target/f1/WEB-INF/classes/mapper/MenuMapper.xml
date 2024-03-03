@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xg.mapper.MenuMapper">
+    <insert id="insert" parameterType="Menu">
+        insert into menu (xgid, xgname, xgprice, xgpic, xgremark, xgsellid)
+        values (seq_id.nextval, #{xgname}, #{xgprice}, #{xgpic}, #{xgremark}, #{xgsellid})
+    </insert>
+
+    <select id="sellerselect" parameterType="Map" resultType="Map">
+        select a.*,b.xgname from menu a left join seller b on a.xgsellid=b.xgid where b.xgname=#{xgsellname}
+        <if test="xgname != null">
+            and a.xgname like '%${xgname}%'
+        </if>
+    </select>
+
+    <delete id="delete" parameterType="int">
+        delete from menu where xgid=#{xgid}
+    </delete>
+
+    <select id="memberselect" parameterType="Map" resultType="Map">
+        select * from menu where xgname like '%${name}%'
+    </select>
+
+    <select id="check" parameterType="Map" resultType="Map">
+        select a.*,b.xgname from menu a left join seller b
+            on a.xgsellid=b.xgid where b.xgname=#{sellername} and a.xgname=#{name}
+    </select>
+</mapper>

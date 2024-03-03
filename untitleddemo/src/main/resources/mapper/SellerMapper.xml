@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xg.mapper.SellerMapper">
+    <insert id="register" parameterType="Map">
+        insert into seller(xgid,xgname,xgpass,xgtel,xgaddr)
+            values(seq_sellid.nextval,#{xgname},#{xgpass},#{xgtel},#{xgaddr})
+    </insert>
+
+    <select id="login" parameterType="Map" resultType="Map">
+        select * from seller where xgname=#{xgname} and xgpass=#{xgpass}
+    </select>
+
+    <select id="check" parameterType="String" resultType="Map">
+        select * from seller where xgname=#{xgname}
+    </select>
+
+    <select id="getid" parameterType="String" resultType="int">
+        select xgid from seller where xgname=#{sellname}
+    </select>
+</mapper>

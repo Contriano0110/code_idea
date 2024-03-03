@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xg.mapper.CartMapper">
+    <insert id="insert" parameterType="Map">
+        insert into cart (xgmemid,xgmenuid) values (#{memid},#{menuid})
+    </insert>
+
+    <delete id="delete" parameterType="Map">
+        delete from cart where xgmemid=#{memid} and xgmenuid=#{menuid}
+    </delete>
+
+    <select id="discart" parameterType="Map" resultType="Map">
+        select menu.xgid,xgpic,xgname,xgprice,xgremark from menu,cart where menu.xgid=cart.xgmenuid
+			and xgmemid=#{memid} and xgname like '%${menuid}%'
+    </select>
+</mapper>

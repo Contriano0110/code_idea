@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="js/qrcode.min.js"></script>
+	<title>Title</title>
+	<style>
+		.container {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 40%;
+			margin-left: auto;
+			margin-right: auto;
+			padding: 10px; /* Optional, for some spacing around the buttons */
+		}
+		.button-container {
+			display: inline-block;
+			text-align: center;
+		}
+		button {
+			font-size: 30px;
+			padding: 10px 20px; /* Optional, for some padding inside the buttons */
+		}
+	</style>
+</head>
+<body>
+<h1 style="text-align: center">欢迎使用本订餐系统</h1>
+<div class="container" style="margin-top: 6%">
+	<div class="button-container">
+		<a href="login.html">
+			<button>我是买家</button>
+		</a>
+<!--		http://172.16.22.62:8080/untitleddemo_war_exploded/login.html-->
+		<input id="text1" type="text" value="http://172.16.22.62:8080/untitleddemo_war_exploded/login.html" style="display: none;"/>
+		<dd id="qrcode1" style="width:200px; height:200px; margin-top:15px;" />
+	</div>
+	<div class="button-container">
+		<a href="slogin.html">
+			<button>我是店家</button>
+		</a>
+		<input id="text2" type="text" value="http://172.16.22.62:8080/untitleddemo_war_exploded/slogin.html" style="display: none;"/>
+		<dd id="qrcode2" style="width:200px; height:200px; margin-top:15px;" />
+	</div>
+</div>
+</body>
+
+<script type="text/javascript">
+	var qrcode1 = new QRCode(document.getElementById("qrcode1"), {
+		width : 200,
+		height : 200
+	});
+	var inputField1 = document.getElementById("text1");
+	function makeCode () {
+		if (!inputField1.value) {
+			inputField1.focus();
+			return;
+		}
+
+		qrcode1.makeCode(inputField1.value);
+	}
+	makeCode();
+	inputField1.addEventListener("keydown", (e) => {
+		if (e.keyCode == 13) {
+			makeCode();
+		}
+	});
+	inputField1.addEventListener("blur", makeCode);
+</script>
+<script type="text/javascript">
+	var qrcode2 = new QRCode(document.getElementById("qrcode2"), {
+		width : 200,
+		height : 200
+	});
+	var inputField2 = document.getElementById("text2");
+	function makeCode () {
+		if (!inputField2.value) {
+			inputField2.focus();
+			return;
+		}
+
+		qrcode2.makeCode(inputField2.value);
+	}
+	makeCode();
+	inputField2.addEventListener("keydown", (e) => {
+		if (e.keyCode == 13) {
+			makeCode();
+		}
+	});
+	inputField2.addEventListener("blur", makeCode);
+</script>
+</html>
